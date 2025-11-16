@@ -8,6 +8,7 @@ const ResetPassword = () => {
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
   const [passwordToggle, setPasswordToggle] = useState(false);
+  const [isError, setIsError] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -15,18 +16,19 @@ const ResetPassword = () => {
     try {
       if (newPassword.length < 6) {
         setMessage("Password must be at least 6 characters long.");
+        setIsError(true);
         return;
       }
       if (newPassword !== confirmPassword) {
         setMessage("Passwords do not match.");
+        setIsError(true);
         return;
       }
     } catch (error) {
       console.error(error);
       setMessage(error.response?.data?.message || "Error resetting password.");
-    } finally {
-      setLoading(false);
-    }
+      setIsError(true);
+    } 
   };
 
   return (
@@ -105,9 +107,7 @@ const ResetPassword = () => {
             <div className="flex items-center justify-center mb-4">
               <p
                 className={`text-sm ${
-                  message.toLowerCase().includes("success")
-                    ? "text-green-600"
-                    : "text-red-600"
+                  isError ? "text-red-600" : "text-green-600"
                 }`}
               >
                 {message}
