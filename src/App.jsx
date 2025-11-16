@@ -5,6 +5,9 @@ import ResetPassword from './pages/ResetPassword';
 import PublicRoute from './components/PublicRoute';
 import PrivateRoute from './components/PrivateRoute';
 import NotFound from './pages/NotFound';
+import CreateUserForm from './components/CreateUserForm';
+import AddProjectForm from './components/AddProjectForm';
+import AddDepartmentForm from './components/AddDepartmentForm';
 
 const App = () => {
   return (
