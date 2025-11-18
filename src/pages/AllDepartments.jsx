@@ -3,14 +3,14 @@ import React, { useEffect, useState } from 'react';
 
 const AllDepartments = ({ refresh }) => {
   const [data, setData] = useState([]);
+  const [error, setError] = useState([]);
   useEffect(() => {
     const apiCall = async () => {
       try {
         const response = await axios.get('http://localhost:8080/api/departments');
         setData(response.data.data);
       } catch (error) {
-        console.error('API Error:', error);
-        console.log(error.message);
+        setError(response.data.message)
       }
     };
 

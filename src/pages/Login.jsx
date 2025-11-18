@@ -17,13 +17,13 @@ const Login = () => {
   const [passwordToggle, setPasswordToggle] = useState(false);
   const navigate = useNavigate();
 
+  const baseURL = import.meta.env.VITE_LOGIN_URL
   const handleSubmit = async (e) => {
     e.preventDefault();
     setMessage('');
     setLoading(true);
     try {
-      console.log('Api called');
-      const response = await axios.post('http://localhost:8080/api/auth/login', {
+      const response = await axios.post(`${baseURL}`, {
         email: email,
         password: password,
       });
@@ -46,7 +46,6 @@ const Login = () => {
         navigate('/dashboard');
       }
     } catch (error) {
-      console.log(error);
       toast.error(error.response.data.message);
       setMessage(error.response.data.message);
       setLoading(false);

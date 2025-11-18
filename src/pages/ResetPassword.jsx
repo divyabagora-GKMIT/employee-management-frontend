@@ -32,10 +32,11 @@ const ResetPassword = () => {
       return;
     }
 
+    const baseURL = import.meta.env.VITE_RESET_PASSWORD
     try {
       setLoading(true);
       const response = await axios.patch(
-        'http://localhost:8080/api/auth/reset',
+        `${baseURL}`,
         {
           email: userEmail,
           newPassword,
@@ -50,7 +51,7 @@ const ResetPassword = () => {
       setMessage(response.data.message || 'Password reset successfully!');
 
       setTimeout(() => {
-        navigate('/dashboard1');
+        navigate('/dashboard');
       }, 1500);
     } catch (error) {
       setMessage(error.response?.data?.message || 'Error resetting password.');
